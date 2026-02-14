@@ -1,0 +1,61 @@
+<section class="max-w-2xl">
+  <h1 class="mb-6 text-2xl font-bold text-zinc-100">4. Schema e riuso</h1>
+
+  <div class="mb-8 text-sm leading-relaxed">
+    <h2 class="mb-3 text-base text-zinc-500">Come funziona</h2>
+    <p class="mb-2 text-zinc-500">Lo <strong>schema</strong> è un insieme di regole (validatori, disabled, readonly, ecc.) definito una volta e applicato in più punti con <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">apply(path, schema)</code>.</p>
+    <ul class="mb-4 list-inside list-disc pl-5">
+      <li class="mb-2"><code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">schema&lt;T&gt;(fn)</code> – definisci le regole per un tipo (es. <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">Address</code>).</li>
+      <li class="mb-2"><code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">apply(customer.billingAddress, addressSchema)</code> – applica lo schema al campo annidato.</li>
+      <li class="mb-2">Per array: <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">applyEach(order.items, itemSchema)</code> applica lo schema a ogni elemento.</li>
+    </ul>
+    <p class="text-zinc-500">Qui lo stesso <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">addressSchema</code> è usato per indirizzo di fatturazione e di spedizione.</p>
+  </div>
+
+  <div>
+    <h3 class="mb-4 text-base text-blue-400">Cliente con indirizzi (stesso schema per entrambi)</h3>
+    <form class="flex max-w-md flex-col gap-4" (ngSubmit)="$event.preventDefault()">
+      <label class="flex flex-col gap-1.5 text-sm">
+        <span class="text-zinc-500">Nome</span>
+        <input type="text" [formField]="customerForm.name" class="rounded-md border border-zinc-700 bg-zinc-950 px-3 py-2 text-zinc-300 focus:border-blue-500 focus:outline-none" />
+        @if (customerForm.name().touched() && customerForm.name().invalid()) {
+          <ul class="mt-1 list-inside list-disc text-sm text-red-400">
+            @for (err of customerForm.name().errors(); track err.kind) {
+              <li>{{ err.message }}</li>
+            }
+          </ul>
+        }
+      </label>
+      <fieldset class="rounded-md border border-zinc-700 p-4">
+        <legend class="text-sm font-medium text-zinc-400">Indirizzo di fatturazione</legend>
+        <div class="mt-2 flex flex-col gap-3">
+          <label class="flex flex-col gap-1.5 text-sm"><span class="text-zinc-500">Via</span><input type="text" [formField]="customerForm.billingAddress.street" class="rounded-md border border-zinc-700 bg-zinc-950 px-3 py-2 text-zinc-300 focus:border-blue-500 focus:outline-none" /></label>
+          <label class="flex flex-col gap-1.5 text-sm"><span class="text-zinc-500">Città</span><input type="text" [formField]="customerForm.billingAddress.city" class="rounded-md border border-zinc-700 bg-zinc-950 px-3 py-2 text-zinc-300 focus:border-blue-500 focus:outline-none" /></label>
+          <label class="flex flex-col gap-1.5 text-sm"><span class="text-zinc-500">CAP</span><input type="text" [formField]="customerForm.billingAddress.zip" class="rounded-md border border-zinc-700 bg-zinc-950 px-3 py-2 text-zinc-300 focus:border-blue-500 focus:outline-none" /></label>
+        </div>
+        @if (customerForm.billingAddress().invalid() && customerForm.billingAddress().touched()) {
+          <ul class="mt-2 list-inside list-disc text-sm text-red-400">
+            @for (err of customerForm.billingAddress().errors(); track err.kind) {
+              <li>{{ err.message }}</li>
+            }
+          </ul>
+        }
+      </fieldset>
+      <fieldset class="rounded-md border border-zinc-700 p-4">
+        <legend class="text-sm font-medium text-zinc-400">Indirizzo di spedizione</legend>
+        <div class="mt-2 flex flex-col gap-3">
+          <label class="flex flex-col gap-1.5 text-sm"><span class="text-zinc-500">Via</span><input type="text" [formField]="customerForm.shippingAddress.street" class="rounded-md border border-zinc-700 bg-zinc-950 px-3 py-2 text-zinc-300 focus:border-blue-500 focus:outline-none" /></label>
+          <label class="flex flex-col gap-1.5 text-sm"><span class="text-zinc-500">Città</span><input type="text" [formField]="customerForm.shippingAddress.city" class="rounded-md border border-zinc-700 bg-zinc-950 px-3 py-2 text-zinc-300 focus:border-blue-500 focus:outline-none" /></label>
+          <label class="flex flex-col gap-1.5 text-sm"><span class="text-zinc-500">CAP</span><input type="text" [formField]="customerForm.shippingAddress.zip" class="rounded-md border border-zinc-700 bg-zinc-950 px-3 py-2 text-zinc-300 focus:border-blue-500 focus:outline-none" /></label>
+        </div>
+        @if (customerForm.shippingAddress().invalid() && customerForm.shippingAddress().touched()) {
+          <ul class="mt-2 list-inside list-disc text-sm text-red-400">
+            @for (err of customerForm.shippingAddress().errors(); track err.kind) {
+              <li>{{ err.message }}</li>
+            }
+          </ul>
+        }
+      </fieldset>
+    </form>
+  </div>
+</section>

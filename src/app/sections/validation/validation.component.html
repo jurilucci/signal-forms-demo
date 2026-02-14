@@ -1,0 +1,57 @@
+<section class="max-w-2xl">
+  <div class="mb-6 flex items-baseline gap-3">
+    <h1 class="text-2xl font-bold tracking-tight text-zinc-100">2. Validazione</h1>
+    <span class="rounded-full bg-amber-500/20 px-2.5 py-0.5 text-xs font-medium text-amber-400">Schema</span>
+  </div>
+
+  <div class="mb-8 border-l-4 border-amber-500/50 bg-zinc-900/50 py-3 pl-4 pr-4 text-sm leading-relaxed">
+    <h2 class="mb-3 text-base font-medium text-zinc-400">Come funziona</h2>
+    <p class="text-zinc-500">I validatori non si passano al singolo controllo come in Reactive Forms, ma in una <strong>funzione schema</strong> come secondo argomento di <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">form(model, schemaFn)</code>.</p>
+    <ul class="mb-4 list-inside list-disc pl-5">
+      <li class="mb-2">La funzione riceve il path del form (es. <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">f</code>) e tu chiami <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">required(f.email)</code>, <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">email(f.email)</code>, <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">minLength(f.password, 8)</code>, ecc.</li>
+      <li class="mb-2">Validatori built-in: <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">required</code>, <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">email</code>, <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">min</code>, <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">max</code>, <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">minLength</code>, <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">maxLength</code>, <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">pattern</code>.</li>
+      <li class="mb-2">Puoi passare <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">&#123; message: '...' &#125;</code> per personalizzare il messaggio.</li>
+      <li class="mb-2">Stato del campo: <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">field().valid()</code>, <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">field().touched()</code>, <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">field().dirty()</code>, <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">field().errors()</code>.</li>
+    </ul>
+  </div>
+
+  <div class="rounded-xl border border-zinc-700/80 bg-zinc-900/80 p-6 shadow-lg shadow-black/20">
+    <h3 class="mb-1 flex items-center gap-2 text-base font-medium text-blue-400">
+      <span class="flex h-2 w-2 rounded-full bg-blue-400" aria-hidden="true"></span>
+      Form di login con validazione
+    </h3>
+    <p class="mb-4 text-xs text-zinc-500">I messaggi di errore appaiono dopo il touch (blur) sui campi.</p>
+    <form class="flex max-w-md flex-col gap-4" (ngSubmit)="$event.preventDefault()">
+      <label class="flex flex-col gap-1.5 text-sm">
+        <span class="text-zinc-500">Email</span>
+        <input type="email" [formField]="loginForm.email" class="rounded-md border border-zinc-700 bg-zinc-950 px-3 py-2 text-zinc-300 focus:border-blue-500 focus:outline-none" />
+        @if (loginForm.email().touched() && loginForm.email().invalid()) {
+          <ul class="mt-2 rounded-md border border-red-500/30 bg-red-500/10 px-3 py-2 list-inside list-disc text-sm text-red-400">
+            @for (err of loginForm.email().errors(); track err.kind) {
+              <li>{{ err.message }}</li>
+            }
+          </ul>
+        }
+      </label>
+      <label class="flex flex-col gap-1.5 text-sm">
+        <span class="text-zinc-500">Password (min 8 caratteri)</span>
+        <input type="password" [formField]="loginForm.password" class="rounded-md border border-zinc-700 bg-zinc-950 px-3 py-2 text-zinc-300 focus:border-blue-500 focus:outline-none" />
+        @if (loginForm.password().touched() && loginForm.password().invalid()) {
+          <ul class="mt-2 rounded-md border border-red-500/30 bg-red-500/10 px-3 py-2 list-inside list-disc text-sm text-red-400">
+            @for (err of loginForm.password().errors(); track err.kind) {
+              <li>{{ err.message }}</li>
+            }
+          </ul>
+        }
+      </label>
+      <div class="flex flex-wrap gap-3 rounded-lg border border-zinc-700/80 bg-zinc-950/80 px-4 py-3">
+        <span class="inline-flex items-center gap-1.5 text-sm">
+          <span class="inline-block h-2 w-2 rounded-full" [class.bg-green-500]="loginForm().valid()" [class.bg-red-500]="!loginForm().valid()"></span>
+          Valido: {{ loginForm().valid() }}
+        </span>
+        <span class="text-sm text-zinc-500">Touched: {{ loginForm().touched() }}</span>
+        <span class="text-sm text-zinc-500">Dirty: {{ loginForm().dirty() }}</span>
+      </div>
+    </form>
+  </div>
+</section>

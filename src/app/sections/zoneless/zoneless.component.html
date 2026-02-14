@@ -1,0 +1,31 @@
+<section class="max-w-2xl">
+  <h1 class="mb-6 text-2xl font-bold text-zinc-100">Zoneless (Angular senza Zone.js)</h1>
+
+  <div class="mb-8 text-sm leading-relaxed">
+    <h2 class="mb-3 text-base text-zinc-500">Cos'è</h2>
+    <p class="mb-2 text-zinc-500">
+      Da Angular 21 la <strong>change detection zoneless</strong> è il <strong>default</strong>:
+      l'app non dipende più da Zone.js per capire quando aggiornare la vista.
+    </p>
+    <ul class="mb-4 list-inside list-disc pl-5">
+      <li class="mb-2">Miglior <strong>compatibilità</strong> con le API del browser e con librerie che non patchano bene con Zone.</li>
+      <li class="mb-2"><strong>Bundle più piccolo</strong> e meno overhead: puoi rimuovere <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">zone.js</code> da <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">angular.json</code> e da <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">package.json</code>.</li>
+      <li class="mb-2">Aggiornamenti basati su <strong>signals</strong>, <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">markForCheck</code>, <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">AsyncPipe</code>, input binding e listener nei template.</li>
+    </ul>
+    <p class="text-zinc-500">
+      Questo componente usa solo <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">signal()</code> e <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">OnPush</code>: cliccando il pulsante, il valore si aggiorna grazie alla notifica del signal, non a Zone.
+    </p>
+  </div>
+
+  <div>
+    <h3 class="mb-4 text-base text-blue-400">Provalo</h3>
+    <div class="rounded-lg border border-zinc-700 bg-zinc-900 p-4">
+      <p class="mb-2 text-lg">Contatore: <strong>{{ count() }}</strong></p>
+      <p class="mb-4 text-sm text-zinc-500">Ultimo aggiornamento: {{ lastUpdate() }}</p>
+      <div class="flex gap-3">
+        <button type="button" (click)="increment()" class="rounded-md border border-zinc-700 bg-zinc-800 px-4 py-2 text-sm text-zinc-300 hover:bg-zinc-700">Incrementa</button>
+        <button type="button" (click)="reset()" class="rounded-md border border-zinc-700 bg-zinc-800 px-4 py-2 text-sm text-zinc-300 hover:bg-zinc-700">Reset</button>
+      </div>
+    </div>
+  </div>
+</section>

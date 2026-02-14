@@ -1,0 +1,46 @@
+<section class="max-w-2xl">
+  <div class="mb-6 flex items-baseline gap-3">
+    <h1 class="text-2xl font-bold tracking-tight text-zinc-100">1. Form Model e primo form</h1>
+    <span class="rounded-full bg-zinc-800 px-2.5 py-0.5 text-xs font-medium text-zinc-400">Essentials</span>
+  </div>
+
+  <div class="mb-8 border-l-4 border-blue-500/60 bg-zinc-900/50 py-3 pl-4 pr-4 text-sm leading-relaxed">
+    <h2 class="mb-3 text-base font-medium text-zinc-400">Come funziona</h2>
+    <ul class="mb-4 list-inside list-disc pl-5">
+      <li class="mb-2"><strong>Form model</strong> = un <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">signal()</code> writable con cui inizializzi il form. Il tipo del form è inferito da questo oggetto.</li>
+      <li class="mb-2"><strong>form(model)</strong> crea un <strong>FieldTree</strong>: una struttura ad albero che rispecchia il modello. Ogni proprietà dell'oggetto diventa un nodo; i valori primitivi sono campi terminali.</li>
+      <li class="mb-2">Navigazione con la <strong>dot notation</strong>: <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">loginForm.email</code>, <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">loginForm.password</code>. Niente <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">get('user.email')</code> e tipi persi.</li>
+      <li class="mb-2">Lo stato del form è <strong>sincronizzato</strong> con il model: se aggiorni il model, il form si aggiorna; se l'utente modifica il form, il model si aggiorna.</li>
+    </ul>
+    <p class="text-zinc-500">In Reactive Forms lo stato era gestito dal form in modo indipendente; con i Signal Forms il model è la fonte di verità.</p>
+  </div>
+
+  <div class="rounded-xl border border-zinc-700/80 bg-zinc-900/80 p-6 shadow-lg shadow-black/20">
+    <h3 class="mb-1 flex items-center gap-2 text-base font-medium text-blue-400">
+      <span class="flex h-2 w-2 rounded-full bg-blue-400" aria-hidden="true"></span>
+      Provalo
+    </h3>
+    <p class="mb-4 text-xs text-zinc-500">Modifica i campi e osserva il model aggiornarsi in tempo reale.</p>
+    <form class="flex max-w-md flex-col gap-4" (ngSubmit)="$event.preventDefault()">
+      <label class="flex flex-col gap-1.5 text-sm">
+        <span class="text-zinc-500">Email</span>
+        <input type="email" [formField]="loginForm.email" class="rounded-lg border border-zinc-700 bg-zinc-950 px-3 py-2.5 text-zinc-300 transition-colors placeholder:text-zinc-600 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20" placeholder="nome&#64;esempio.it" />
+      </label>
+      <label class="flex flex-col gap-1.5 text-sm">
+        <span class="text-zinc-500">Password</span>
+        <input type="password" [formField]="loginForm.password" class="rounded-lg border border-zinc-700 bg-zinc-950 px-3 py-2.5 text-zinc-300 transition-colors placeholder:text-zinc-600 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20" />
+      </label>
+      <div class="rounded-lg border border-zinc-700/80 bg-zinc-950/80 px-4 py-3">
+        <p class="text-xs font-medium uppercase tracking-wider text-zinc-500">Valori in tempo reale</p>
+        <dl class="mt-1 flex flex-wrap gap-x-6 gap-y-1 text-sm text-zinc-300">
+          <div><dt class="inline font-medium text-zinc-500">email:</dt> <dd class="inline">{{ loginForm.email().value() || '—' }}</dd></div>
+          <div><dt class="inline font-medium text-zinc-500">password length:</dt> <dd class="inline">{{ loginForm.password().value().length }}</dd></div>
+        </dl>
+      </div>
+      <div class="mt-2 flex gap-3">
+        <button type="button" (click)="fillSample()" class="rounded-lg border border-zinc-700 bg-zinc-800 px-4 py-2 text-sm font-medium text-zinc-300 transition-colors hover:bg-zinc-700 focus-visible:outline focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950">Compila esempio</button>
+        <button type="button" (click)="resetForm()" class="rounded-lg border border-zinc-700 bg-zinc-800 px-4 py-2 text-sm font-medium text-zinc-300 transition-colors hover:bg-zinc-700 focus-visible:outline focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950">Reset</button>
+      </div>
+    </form>
+  </div>
+</section>

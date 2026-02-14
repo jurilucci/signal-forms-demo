@@ -1,0 +1,102 @@
+<section class="max-w-3xl">
+  <h1 class="mb-6 text-2xl font-bold text-zinc-100">Angular Aria</h1>
+
+  <div class="mb-8 text-sm leading-relaxed">
+    <h2 class="mb-3 text-base text-zinc-500">Cos'è</h2>
+    <p class="mb-2 text-zinc-500">
+      <strong>Angular Aria</strong> (<code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">&#64;angular/aria</code>) è un pacchetto che fornisce direttive
+      <strong>headless</strong> e pronte per l'<strong>accessibilità</strong>, basate sui pattern WAI-ARIA.
+    </p>
+    <ul class="mb-4 list-inside list-disc pl-5">
+      <li class="mb-2">Gestione <strong>tastiera</strong>, attributi <strong>ARIA</strong>, <strong>focus</strong> e supporto screen reader.</li>
+      <li class="mb-2">Nessuno stile imposto: puoi applicare il tuo design (Tailwind, Material, custom).</li>
+      <li class="mb-2">Pattern inclusi: accordion, combobox, grid, listbox, menu, tab, toolbar, tree.</li>
+    </ul>
+    <p class="mt-4">
+      <a href="https://angular.dev/guide/aria/overview" target="_blank" rel="noopener" class="text-blue-400 no-underline hover:underline">Angular Aria · Overview</a>
+    </p>
+  </div>
+
+  <div class="space-y-10">
+    <h2 class="text-lg text-zinc-300">Esempi</h2>
+
+    <div class="rounded-lg border border-zinc-700 bg-zinc-900 p-5">
+      <h3 class="mb-2 text-base text-blue-400">Toolbar</h3>
+      <p class="mb-4 text-sm text-zinc-500">Barra strumenti accessibile: navigazione da tastiera (frecce), Enter/Space per attivare.</p>
+      <div class="flex flex-wrap gap-4 rounded-md bg-zinc-950 p-2" ngToolbar aria-label="Controlli testo">
+        <div class="flex gap-1">
+          <button type="button" class="rounded-md border border-zinc-700 bg-zinc-800 px-3 py-2 text-sm text-zinc-300 hover:bg-zinc-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500" ngToolbarWidget value="undo" (click)="onToolbarAction('undo')">Annulla</button>
+          <button type="button" class="rounded-md border border-zinc-700 bg-zinc-800 px-3 py-2 text-sm text-zinc-300 hover:bg-zinc-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500" ngToolbarWidget value="redo" (click)="onToolbarAction('redo')">Ripeti</button>
+        </div>
+        <div class="flex gap-1">
+          <button type="button" class="rounded-md border border-zinc-700 bg-zinc-800 px-3 py-2 text-sm text-zinc-300 hover:bg-zinc-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500" ngToolbarWidget value="bold" (click)="onToolbarAction('bold')"><strong>B</strong></button>
+          <button type="button" class="rounded-md border border-zinc-700 bg-zinc-800 px-3 py-2 text-sm text-zinc-300 hover:bg-zinc-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500" ngToolbarWidget value="italic" (click)="onToolbarAction('italic')"><em>I</em></button>
+        </div>
+      </div>
+      @if (lastToolbarAction()) {
+        <p class="mt-3 text-sm text-zinc-500">Ultima azione: <strong>{{ lastToolbarAction() }}</strong></p>
+      }
+    </div>
+
+    <div class="rounded-lg border border-zinc-700 bg-zinc-900 p-5">
+      <h3 class="mb-2 text-base text-blue-400">Tabs</h3>
+      <p class="mb-4 text-sm text-zinc-500">Tab accessibili: frecce per spostarsi, il contenuto è collegato al tab attivo.</p>
+      <div ngTabs>
+        <ul class="mb-4 flex gap-1 border-b border-zinc-700 pb-0" ngTabList [(selectedTab)]="selectedTab">
+          <li ngTab value="overview" class="list-none border-b-2 border-transparent px-4 py-2 text-sm text-zinc-500 hover:text-zinc-300">Panoramica</li>
+          <li ngTab value="details" class="list-none border-b-2 border-transparent px-4 py-2 text-sm text-zinc-500 hover:text-zinc-300">Dettagli</li>
+          <li ngTab value="settings" class="list-none border-b-2 border-transparent px-4 py-2 text-sm text-zinc-500 hover:text-zinc-300">Impostazioni</li>
+        </ul>
+        <div ngTabPanel value="overview"><ng-template ngTabContent><p class="text-zinc-300">Contenuto della tab <strong>Panoramica</strong>. Caricato on demand.</p></ng-template></div>
+        <div ngTabPanel value="details"><ng-template ngTabContent><p class="text-zinc-300">Contenuto della tab <strong>Dettagli</strong>.</p></ng-template></div>
+        <div ngTabPanel value="settings"><ng-template ngTabContent><p class="text-zinc-300">Contenuto della tab <strong>Impostazioni</strong>.</p></ng-template></div>
+      </div>
+    </div>
+
+    <div class="rounded-lg border border-zinc-700 bg-zinc-900 p-5">
+      <h3 class="mb-2 text-base text-blue-400">Accordion</h3>
+      <p class="mb-4 text-sm text-zinc-500">Accordion: un solo pannello aperto alla volta. Frecce per navigare, Enter/Space per aprire/chiudere.</p>
+      <div ngAccordionGroup class="divide-y divide-zinc-700">
+        <div>
+          <h4><button type="button" class="w-full rounded-none border-none bg-zinc-800 px-4 py-3 text-left text-zinc-300 hover:bg-zinc-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500" ngAccordionTrigger panelId="item-1">Sezione 1</button></h4>
+          <div ngAccordionPanel panelId="item-1"><ng-template ngAccordionContent><p class="bg-zinc-950 p-4 text-sm text-zinc-500">Contenuto della sezione 1. Il contenuto è renderizzato solo al primo expand (lazy).</p></ng-template></div>
+        </div>
+        <div>
+          <h4><button type="button" class="w-full rounded-none border-none bg-zinc-800 px-4 py-3 text-left text-zinc-300 hover:bg-zinc-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500" ngAccordionTrigger panelId="item-2">Sezione 2</button></h4>
+          <div ngAccordionPanel panelId="item-2"><ng-template ngAccordionContent><p class="bg-zinc-950 p-4 text-sm text-zinc-500">Contenuto della sezione 2.</p></ng-template></div>
+        </div>
+        <div>
+          <h4><button type="button" class="w-full rounded-none border-none bg-zinc-800 px-4 py-3 text-left text-zinc-300 hover:bg-zinc-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500" ngAccordionTrigger panelId="item-3">Sezione 3</button></h4>
+          <div ngAccordionPanel panelId="item-3"><ng-template ngAccordionContent><p class="bg-zinc-950 p-4 text-sm text-zinc-500">Contenuto della sezione 3.</p></ng-template></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rounded-lg border border-zinc-700 bg-zinc-900 p-5">
+      <h3 class="mb-2 text-base text-blue-400">Menu</h3>
+      <p class="mb-4 text-sm text-zinc-500">Menu a tendina: click o tastiera per aprire, frecce per navigare, Enter per selezionare, Escape per chiudere.</p>
+      <button type="button" class="rounded-md border border-zinc-700 bg-zinc-800 px-4 py-2 text-sm text-zinc-300 hover:bg-zinc-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500" ngMenuTrigger [menu]="actionsMenu">Azioni &#9660;</button>
+      <div class="mt-1 inline-block min-w-[160px] rounded-md border border-zinc-700 bg-zinc-800 py-1 shadow-lg" ngMenu #actionsMenu="ngMenu">
+        <ng-template ngMenuContent>
+          <div ngMenuItem value="new" class="cursor-pointer px-4 py-2 text-sm text-zinc-300 hover:bg-zinc-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500">Nuovo</div>
+          <div ngMenuItem value="open" class="cursor-pointer px-4 py-2 text-sm text-zinc-300 hover:bg-zinc-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500">Apri</div>
+          <div ngMenuItem value="save" class="cursor-pointer px-4 py-2 text-sm text-zinc-300 hover:bg-zinc-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500">Salva</div>
+          <div ngMenuItem value="export" class="cursor-pointer px-4 py-2 text-sm text-zinc-300 hover:bg-zinc-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500">Esporta</div>
+        </ng-template>
+      </div>
+    </div>
+
+    <div class="rounded-lg border border-zinc-700 bg-zinc-900 p-5">
+      <h3 class="mb-2 text-base text-blue-400">Listbox</h3>
+      <p class="mb-4 text-sm text-zinc-500">Lista di opzioni selezionabile: frecce per muoversi, Enter/Space per selezionare.</p>
+      <ul class="max-h-52 list-none overflow-y-auto rounded-md border border-zinc-700 bg-zinc-950 py-1" ngListbox [(values)]="selectedListboxValues">
+        @for (opt of listboxOptions; track opt) {
+          <li ngOption [value]="opt" [label]="opt" class="cursor-pointer px-4 py-2 text-sm text-zinc-300 hover:bg-zinc-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500">{{ opt }}</li>
+        }
+      </ul>
+      @if (selectedListboxValues().length > 0) {
+        <p class="mt-3 text-sm text-zinc-500">Selezionato: <strong>{{ selectedListboxValues()[0] }}</strong></p>
+      }
+    </div>
+  </div>
+</section>

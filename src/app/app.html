@@ -1,0 +1,24 @@
+<div class="flex min-h-[98vh] font-sans">
+  <nav class="flex w-60 flex-col gap-1 border-r border-zinc-800 bg-zinc-900 px-4 py-6 text-zinc-200">
+    <div class="mb-4 flex items-center gap-2">
+      <h2 class="text-sm font-semibold text-zinc-500">Angular 21</h2>
+      <span class="rounded-full bg-blue-500/20 px-2 py-0.5 text-xs font-medium text-blue-400">Signal Forms</span>
+    </div>
+    <div class="mb-2 h-px bg-zinc-800" aria-hidden="true"></div>
+    <a routerLink="/intro" routerLinkActive="bg-green-600 text-white" class="rounded-md px-3 py-2 text-sm text-zinc-300 no-underline transition-colors hover:bg-zinc-800 hover:text-white focus-visible:outline focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-900">1. Intro / Form Model</a>
+    <a routerLink="/validation" routerLinkActive="bg-green-600 text-white" class="rounded-md px-3 py-2 text-sm text-zinc-300 no-underline transition-colors hover:bg-zinc-800 hover:text-white focus-visible:outline focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-900">2. Validazione</a>
+    <a routerLink="/custom-validators" routerLinkActive="bg-green-600 text-white" class="rounded-md px-3 py-2 text-sm text-zinc-300 no-underline transition-colors hover:bg-zinc-800 hover:text-white focus-visible:outline focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-900">3. Validatori custom</a>
+    <a routerLink="/schemas" routerLinkActive="bg-green-600 text-white" class="rounded-md px-3 py-2 text-sm text-zinc-300 no-underline transition-colors hover:bg-zinc-800 hover:text-white focus-visible:outline focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-900">4. Schema e riuso</a>
+    <a routerLink="/submit-reset" routerLinkActive="bg-green-600 text-white" class="rounded-md px-3 py-2 text-sm text-zinc-300 no-underline transition-colors hover:bg-zinc-800 hover:text-white focus-visible:outline focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-900">5. Submit e Reset</a>
+    <a routerLink="/custom-control" routerLinkActive="bg-green-600 text-white" class="rounded-md px-3 py-2 text-sm text-zinc-300 no-underline transition-colors hover:bg-zinc-800 hover:text-white focus-visible:outline focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-900">6. Custom control</a>
+    <a routerLink="/compat-form" routerLinkActive="bg-green-600 text-white" class="rounded-md px-3 py-2 text-sm text-zinc-300 no-underline transition-colors hover:bg-zinc-800 hover:text-white focus-visible:outline focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-900">7. compatForm</a>
+    <a routerLink="/zoneless" routerLinkActive="bg-green-600 text-white" class="rounded-md px-3 py-2 text-sm text-zinc-300 no-underline transition-colors hover:bg-zinc-800 hover:text-white focus-visible:outline focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-900">8. Zoneless</a>
+    <a routerLink="/angular-aria" routerLinkActive="bg-green-600 text-white" class="rounded-md px-3 py-2 text-sm text-zinc-300 no-underline transition-colors hover:bg-zinc-800 hover:text-white focus-visible:outline focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-900">9. Angular Aria</a>
+    <a routerLink="/angular-mcp" routerLinkActive="bg-green-600 text-white" class="rounded-md px-3 py-2 text-sm text-zinc-300 no-underline transition-colors hover:bg-zinc-800 hover:text-white focus-visible:outline focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-900">10. Angular MCP</a>
+    <a routerLink="/tailwind" routerLinkActive="bg-green-600 text-white" class="rounded-md px-3 py-2 text-sm text-zinc-300 no-underline transition-colors hover:bg-zinc-800 hover:text-white focus-visible:outline focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-900">11. Tailwind</a>
+    <a routerLink="/control-flow" routerLinkActive="bg-green-600 text-white" class="rounded-md px-3 py-2 text-sm text-zinc-300 no-underline transition-colors hover:bg-zinc-800 hover:text-white focus-visible:outline focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-900">12. Control flow</a>
+  </nav>
+  <main class="flex-1 overflow-auto bg-zinc-950 p-8 text-zinc-300 ring-1 ring-zinc-800/50">
+    <router-outlet />
+  </main>
+</div>

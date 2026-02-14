@@ -1,0 +1,51 @@
+<section class="max-w-2xl">
+  <h1 class="mb-6 text-2xl font-bold text-zinc-100">5. Submit e Reset</h1>
+
+  <div class="mb-8 text-sm leading-relaxed">
+    <h2 class="mb-3 text-base text-zinc-500">Come funziona</h2>
+    <ul class="mb-4 list-inside list-disc pl-5">
+      <li class="mb-2"><code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">submit(form, async (form) => &#123; ... &#125;)</code> gestisce il flusso: marca tutti i campi come <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">touched</code>, verifica <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">valid()</code>; se non valido non chiama l'action. Durante l'esecuzione <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">form().submitting()</code> è <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">true</code>.</li>
+      <li class="mb-2">Puoi ritornare errori server: <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">return [&#123; field: myForm.email, error: &#123; kind: 'server', message: '...' &#125; &#125;]</code> e vengono applicati ai campi.</li>
+      <li class="mb-2"><code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">form().reset()</code> resetta lo stato di interazione (touched, dirty). Opzionalmente puoi passare un nuovo valore: <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">reset(&#123; email: '', ... &#125;)</code>.</li>
+    </ul>
+  </div>
+
+  <div>
+    <h3 class="mb-4 text-base text-blue-400">Contatto</h3>
+    <form class="flex max-w-md flex-col gap-4" (ngSubmit)="onSubmit(); $event.preventDefault()">
+      <label class="flex flex-col gap-1.5 text-sm">
+        <span class="text-zinc-500">Email</span>
+        <input type="email" [formField]="contactForm.email" class="rounded-md border border-zinc-700 bg-zinc-950 px-3 py-2 text-zinc-300 focus:border-blue-500 focus:outline-none" />
+        @if (contactForm.email().touched() && contactForm.email().invalid()) {
+          <ul class="mt-1 list-inside list-disc text-sm text-red-400">
+            @for (err of contactForm.email().errors(); track err.kind) {
+              <li>{{ err.message }}</li>
+            }
+          </ul>
+        }
+      </label>
+      <label class="flex flex-col gap-1.5 text-sm">
+        <span class="text-zinc-500">Messaggio</span>
+        <textarea [formField]="contactForm.message" rows="3" class="rounded-md border border-zinc-700 bg-zinc-950 px-3 py-2 text-zinc-300 focus:border-blue-500 focus:outline-none"></textarea>
+        @if (contactForm.message().touched() && contactForm.message().invalid()) {
+          <ul class="mt-1 list-inside list-disc text-sm text-red-400">
+            @for (err of contactForm.message().errors(); track err.kind) {
+              <li>{{ err.message }}</li>
+            }
+          </ul>
+        }
+      </label>
+      @if (contactForm().submitting()) {
+        <p class="text-sm text-zinc-500">Invio in corso...</p>
+      }
+      @if (submitResult()) {
+        <p class="text-sm text-green-400">{{ submitResult() }}</p>
+      }
+      <div class="flex gap-3">
+        <button type="submit" [disabled]="contactForm().submitting()" class="rounded-md border border-zinc-700 bg-zinc-800 px-4 py-2 text-sm text-zinc-300 hover:bg-zinc-700 disabled:opacity-50">Invia</button>
+        <button type="button" (click)="onReset()" class="rounded-md border border-zinc-700 bg-zinc-800 px-4 py-2 text-sm text-zinc-300 hover:bg-zinc-700">Reset stato</button>
+        <button type="button" (click)="onResetWithValue()" class="rounded-md border border-zinc-700 bg-zinc-800 px-4 py-2 text-sm text-zinc-300 hover:bg-zinc-700">Reset + valori vuoti</button>
+      </div>
+    </form>
+  </div>
+</section>

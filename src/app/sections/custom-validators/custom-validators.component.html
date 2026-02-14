@@ -1,0 +1,54 @@
+<section class="max-w-2xl">
+  <h1 class="mb-6 text-2xl font-bold text-zinc-100">3. Validatori custom</h1>
+
+  <div class="mb-8 text-sm leading-relaxed">
+    <h2 class="mb-3 text-base text-zinc-500">Come funziona</h2>
+    <p class="text-zinc-500">Con <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">validate(path, (ctx) => ...)</code> puoi definire validatori custom. Il contesto <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">ctx</code> espone:</p>
+    <ul class="mb-4 list-inside list-disc pl-5">
+      <li class="mb-2"><code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">value()</code> – valore del campo corrente</li>
+      <li class="mb-2"><code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">valueOf(path)</code> – valore di un altro campo (es. <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">valueOf(f.password)</code>)</li>
+      <li class="mb-2"><code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">state</code> / <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">stateOf(path)</code> – stato (touched, dirty, ecc.)</li>
+    </ul>
+    <p class="mb-2 text-zinc-500">Ritorni <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">undefined</code> se ok, oppure un oggetto <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">&#123; kind: string, message?: string &#125;</code> (o un array) per segnalare errore.</p>
+    <p class="text-zinc-500"><strong>Reattività:</strong> il validatore viene rieseguito quando cambia qualsiasi signal che leggi (<code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">value()</code>, <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">valueOf(...)</code>). Es: cambiando <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">password</code>, il validatore di <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">confirmPassword</code> si ricalcola da solo, senza <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">updateValueAndValidity()</code>.</p>
+  </div>
+
+  <div>
+    <h3 class="mb-4 text-base text-blue-400">Registrazione (username senza spazi, password devono coincidere)</h3>
+    <form class="flex max-w-md flex-col gap-4" (ngSubmit)="$event.preventDefault()">
+      <label class="flex flex-col gap-1.5 text-sm">
+        <span class="text-zinc-500">Username (no spazi)</span>
+        <input type="text" [formField]="registerForm.username" class="rounded-md border border-zinc-700 bg-zinc-950 px-3 py-2 text-zinc-300 focus:border-blue-500 focus:outline-none" />
+        @if (registerForm.username().touched() && registerForm.username().invalid()) {
+          <ul class="mt-1 list-inside list-disc text-sm text-red-400">
+            @for (err of registerForm.username().errors(); track err.kind) {
+              <li>{{ err.message }}</li>
+            }
+          </ul>
+        }
+      </label>
+      <label class="flex flex-col gap-1.5 text-sm">
+        <span class="text-zinc-500">Password</span>
+        <input type="password" [formField]="registerForm.password" class="rounded-md border border-zinc-700 bg-zinc-950 px-3 py-2 text-zinc-300 focus:border-blue-500 focus:outline-none" />
+        @if (registerForm.password().touched() && registerForm.password().invalid()) {
+          <ul class="mt-1 list-inside list-disc text-sm text-red-400">
+            @for (err of registerForm.password().errors(); track err.kind) {
+              <li>{{ err.message }}</li>
+            }
+          </ul>
+        }
+      </label>
+      <label class="flex flex-col gap-1.5 text-sm">
+        <span class="text-zinc-500">Conferma password</span>
+        <input type="password" [formField]="registerForm.confirmPassword" class="rounded-md border border-zinc-700 bg-zinc-950 px-3 py-2 text-zinc-300 focus:border-blue-500 focus:outline-none" />
+        @if (registerForm.confirmPassword().touched() && registerForm.confirmPassword().invalid()) {
+          <ul class="mt-1 list-inside list-disc text-sm text-red-400">
+            @for (err of registerForm.confirmPassword().errors(); track err.kind) {
+              <li>{{ err.message }}</li>
+            }
+          </ul>
+        }
+      </label>
+    </form>
+  </div>
+</section>

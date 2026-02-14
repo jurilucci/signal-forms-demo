@@ -1,0 +1,22 @@
+<section class="max-w-2xl">
+  <h1 class="mb-6 text-2xl font-bold text-zinc-100">6. Custom control (FormValueControl)</h1>
+
+  <div class="mb-8 text-sm leading-relaxed">
+    <h2 class="mb-3 text-base text-zinc-500">Come funziona</h2>
+    <p class="mb-2 text-zinc-500">Invece di <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">ControlValueAccessor</code>, con i Signal Forms basta implementare <strong>FormValueControl&lt;T&gt;</strong>:</p>
+    <ul class="mb-4 list-inside list-disc pl-5">
+      <li class="mb-2">Proprietà obbligatoria: <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">readonly value = model&lt;T&gt;(...)</code> (ModelSignal).</li>
+      <li class="mb-2">Opzionali: <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">disabled</code>, <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">touched</code>, <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">errors</code>, <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">invalid</code>, <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">name</code>, <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">required</code>, ecc. Se presenti, la direttiva <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">[formField]</code> le compila automaticamente.</li>
+    </ul>
+    <p class="text-zinc-500">Qui sotto un componente custom <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">app-custom-label-input</code> con label e messaggio di errore, usato con <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">[formField]="demoForm.name"</code>.</p>
+  </div>
+
+  <div>
+    <h3 class="mb-4 text-base text-blue-400">Form con custom control</h3>
+    <form class="flex max-w-md flex-col gap-4" (ngSubmit)="$event.preventDefault()">
+      <app-custom-label-input label="Nome" [formField]="demoForm.name" />
+      <app-custom-label-input label="Email" [formField]="demoForm.email" />
+      <p class="mt-2 text-sm text-zinc-500">Valore nome: {{ demoForm.name().value() }}</p>
+    </form>
+  </div>
+</section>

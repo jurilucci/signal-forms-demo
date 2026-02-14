@@ -1,0 +1,53 @@
+<section class="max-w-2xl">
+  <div class="mb-6 flex items-baseline gap-3">
+    <h1 class="text-2xl font-bold tracking-tight text-zinc-100">Tailwind CSS</h1>
+    <span class="rounded-full bg-emerald-500/20 px-2.5 py-0.5 text-xs font-medium text-emerald-400">Utility-first</span>
+  </div>
+
+  <div class="mb-8 border-l-4 border-zinc-600 bg-zinc-900/50 py-3 pl-4 pr-4 text-sm leading-relaxed">
+    <h2 class="mb-3 text-base font-medium text-zinc-400">Cos'è</h2>
+    <p class="mb-2 text-zinc-500">
+      <strong>Tailwind CSS</strong> è il framework utility-first supportato ufficialmente da Angular:
+      nessun componente predefinito, ma puoi costruire <strong>card</strong>, <strong>badge</strong>, <strong>alert</strong>, <strong>form</strong> con le sole classi.
+    </p>
+    <ul class="mb-4 list-inside list-disc pl-5">
+      <li class="mb-2">Setup: <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">ng add &#64;angular/tailwind</code> o PostCSS + <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">@use 'tailwindcss'</code>.</li>
+      <li class="mb-2">Content detection per tree-shaking delle classi non usate.</li>
+    </ul>
+    <p class="mt-4">
+      <a href="https://angular.dev/guide/tailwind" target="_blank" rel="noopener" class="text-blue-400 no-underline hover:underline">Tailwind · Angular</a>
+      —
+      <a href="https://tailwindcss.com/plus/ui-blocks/documentation" target="_blank" rel="noopener" class="text-zinc-400 no-underline hover:underline">Tailwind Plus (UI Blocks, a pagamento)</a>
+    </p>
+  </div>
+
+  <div class="space-y-6">
+    <h3 class="text-base font-medium text-zinc-400">Pattern comuni (solo utility Tailwind)</h3>
+
+    <div class="rounded-xl border border-zinc-700/80 bg-zinc-900/80 p-6 shadow-lg shadow-black/20">
+      <h4 class="mb-3 text-sm font-medium text-blue-400">Badge / Pills</h4>
+      <div class="flex flex-wrap gap-2">
+        <span class="rounded-full bg-blue-500/20 px-2.5 py-0.5 text-xs font-medium text-blue-400">Nuovo</span>
+        <span class="rounded-full bg-amber-500/20 px-2.5 py-0.5 text-xs font-medium text-amber-400">Beta</span>
+        <span class="rounded-full bg-green-500/20 px-2.5 py-0.5 text-xs font-medium text-green-400">OK</span>
+        <span class="rounded-full bg-zinc-700 px-2.5 py-0.5 text-xs font-medium text-zinc-300">Neutro</span>
+      </div>
+    </div>
+
+    <div class="rounded-xl border border-zinc-700/80 bg-zinc-900/80 p-6 shadow-lg shadow-black/20">
+      <h4 class="mb-3 text-sm font-medium text-blue-400">Alert / Notice</h4>
+      <div class="space-y-3">
+        <div class="rounded-lg border border-blue-500/30 bg-blue-500/10 px-4 py-3 text-sm text-blue-300">Info: tutto fatto con classi Tailwind, nessun componente JS.</div>
+        <div class="rounded-lg border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm text-amber-300">Attenzione: Tailwind Plus (Elements, UI Blocks) richiede licenza a pagamento.</div>
+      </div>
+    </div>
+
+    <div class="rounded-xl border border-zinc-700/80 bg-zinc-900/80 p-6 shadow-lg shadow-black/20">
+      <h4 class="mb-3 text-sm font-medium text-blue-400">Card con azione</h4>
+      <div class="rounded-lg border border-zinc-700 bg-zinc-950/80 p-4">
+        <p class="text-sm text-zinc-300">Questa card usa <code class="rounded bg-zinc-800 px-1 py-0.5 text-xs">rounded-lg border shadow</code> e pulsante con <code class="rounded bg-zinc-800 px-1 py-0.5 text-xs">focus-visible:ring-2</code>.</p>
+        <button type="button" class="mt-3 rounded-lg bg-blue-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-600 focus-visible:outline focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-900">Azione</button>
+      </div>
+    </div>
+  </div>
+</section>

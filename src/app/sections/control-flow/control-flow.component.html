@@ -1,0 +1,65 @@
+<section class="max-w-2xl">
+  <h1 class="mb-6 text-2xl font-bold text-zinc-100">Control flow e template</h1>
+
+  <div class="mb-8 text-sm leading-relaxed">
+    <h2 class="mb-3 text-base text-zinc-500">Nuova sintassi built-in</h2>
+    <p class="mb-2 text-zinc-500">
+      Angular offre il <strong>control flow</strong> nel template con blocchi integrati:
+      <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">&#64;if</code>, <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">&#64;for</code>, <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">&#64;switch</code>, <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">&#64;defer</code>.
+    </p>
+    <ul class="mb-4 list-inside list-disc pl-5">
+      <li class="mb-2"><code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">&#64;if (cond) &#123; ... &#125;</code> / <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">&#64;else</code> — condizionale senza <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">*ngIf</code>.</li>
+      <li class="mb-2"><code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">&#64;for (item of items; track item.id)</code> — loop con <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">track</code> obbligatorio, migliore performance.</li>
+      <li class="mb-2"><code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">&#64;switch (value)</code> con <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">&#64;case</code> / <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">&#64;default</code> — scelta multipla.</li>
+      <li class="mb-2"><code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">&#64;defer</code> — caricamento lazy di blocchi (e componenti) al viewport o on interaction.</li>
+    </ul>
+  </div>
+
+  <div class="space-y-6">
+    <div class="rounded-lg border border-zinc-700 bg-zinc-900 p-4">
+      <h3 class="mb-3 text-base text-blue-400">&#64;if / &#64;else</h3>
+      @if (showMessage()) {
+        <p class="mb-3 text-zinc-300">Questo messaggio è visibile. Clicca il pulsante per nasconderlo.</p>
+      } @else {
+        <p class="mb-3 text-zinc-500">Messaggio nascosto. Clicca di nuovo per mostrarlo.</p>
+      }
+      <button type="button" (click)="toggleMessage()" class="rounded-md border border-zinc-700 bg-zinc-800 px-4 py-2 text-sm text-zinc-300 hover:bg-zinc-700">Toggle messaggio</button>
+    </div>
+
+    <div class="rounded-lg border border-zinc-700 bg-zinc-900 p-4">
+      <h3 class="mb-3 text-base text-blue-400">&#64;for (con track)</h3>
+      <ul class="mb-3 list-inside list-disc pl-5">
+        @for (item of items(); track item) {
+          <li class="text-zinc-300">{{ item }}</li>
+        }
+      </ul>
+      <button type="button" (click)="addItem()" class="rounded-md border border-zinc-700 bg-zinc-800 px-4 py-2 text-sm text-zinc-300 hover:bg-zinc-700">Aggiungi elemento</button>
+    </div>
+
+    <div class="rounded-lg border border-zinc-700 bg-zinc-900 p-4">
+      <h3 class="mb-3 text-base text-blue-400">&#64;switch</h3>
+      <p class="mb-2 text-zinc-400">Tema selezionato:</p>
+      <div class="mb-3 flex gap-2">
+        <button type="button" (click)="setTheme('light')" [class.bg-green-600]="theme() === 'light'" [class.text-white]="theme() === 'light'" class="rounded-md border border-zinc-700 bg-zinc-800 px-4 py-2 text-sm text-zinc-300 hover:bg-zinc-700">Light</button>
+        <button type="button" (click)="setTheme('dark')" [class.bg-green-600]="theme() === 'dark'" [class.text-white]="theme() === 'dark'" class="rounded-md border border-zinc-700 bg-zinc-800 px-4 py-2 text-sm text-zinc-300 hover:bg-zinc-700">Dark</button>
+        <button type="button" (click)="setTheme('system')" [class.bg-green-600]="theme() === 'system'" [class.text-white]="theme() === 'system'" class="rounded-md border border-zinc-700 bg-zinc-800 px-4 py-2 text-sm text-zinc-300 hover:bg-zinc-700">System</button>
+      </div>
+      <p class="text-sm text-zinc-400">
+        @switch (theme()) {
+          @case ('light') { <span>☀️ Modalità chiara</span> }
+          @case ('dark') { <span>🌙 Modalità scura</span> }
+          @default { <span>⚙️ Segue le preferenze di sistema</span> }
+        }
+      </p>
+    </div>
+
+    <div class="rounded-lg border border-zinc-700 bg-zinc-900 p-4">
+      <h3 class="mb-3 text-base text-blue-400">&#64;defer (semplificato)</h3>
+      @if (!loaded()) {
+        <button type="button" (click)="loadLazy()" class="rounded-md border border-zinc-700 bg-zinc-800 px-4 py-2 text-sm text-zinc-300 hover:bg-zinc-700">Carica contenuto differito</button>
+      } @else {
+        <p class="text-sm text-zinc-400">Contenuto caricato on demand. In un vero &#64;defer potresti usare <code class="rounded bg-zinc-800 px-1 py-0.5 text-[0.85em]">&#64;defer (on viewport)</code> o <code class="rounded bg-zinc-800 px-1 py-0.5 text-[0.85em]">&#64;defer (on interaction)</code>.</p>
+      }
+    </div>
+  </div>
+</section>

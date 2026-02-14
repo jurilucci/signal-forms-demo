@@ -1,0 +1,46 @@
+<section class="max-w-2xl">
+  <h1 class="mb-6 text-2xl font-bold text-zinc-100">7. compatForm (mixing con Reactive Forms)</h1>
+
+  <div class="mb-8 text-sm leading-relaxed">
+    <h2 class="mb-3 text-base text-zinc-500">Come funziona</h2>
+    <p class="mb-2 text-zinc-500"><code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">compatForm(model)</code> è come <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">form(model)</code>, ma il model può contenere anche <strong>FormControl</strong> (Reactive Forms).</p>
+    <ul class="mb-4 list-inside list-disc pl-5">
+      <li class="mb-2">I valori dei FormControl vengono "srotolati": <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">mixedForm.age().value()</code> restituisce il <em>numero</em>, non il FormControl.</li>
+      <li class="mb-2">Se ti serve il FormControl originale: <code class="rounded bg-zinc-800 px-1.5 py-0.5 text-[0.85em]">mixedForm.age().control()</code> (sulla CompatFieldState).</li>
+      <li class="mb-2">La sincronizzazione è bidirezionale: cambi da FormControl si riflettono sul form e viceversa. Anche touched/dirty si propagano.</li>
+      <li class="mb-2">Non puoi applicare validatori Signal Forms (required, validate) ai campi che sono FormControl; la validazione resta quella del FormControl.</li>
+    </ul>
+    <p class="text-zinc-500">Utile per migrare gradualmente: tieni alcuni FormControl e passa il resto a Signal Forms.</p>
+  </div>
+
+  <div>
+    <h3 class="mb-4 text-base text-blue-400">Form misto (name = Signal Forms, age = FormControl con Validators.min(3))</h3>
+    <form class="flex max-w-md flex-col gap-4" (ngSubmit)="$event.preventDefault()">
+      <label class="flex flex-col gap-1.5 text-sm">
+        <span class="text-zinc-500">Nome (signal form)</span>
+        <input type="text" [formField]="mixedForm.name" class="rounded-md border border-zinc-700 bg-zinc-950 px-3 py-2 text-zinc-300 focus:border-blue-500 focus:outline-none" />
+        @if (mixedForm.name().touched() && mixedForm.name().invalid()) {
+          <ul class="mt-1 list-inside list-disc text-sm text-red-400">
+            @for (err of mixedForm.name().errors(); track err.kind) {
+              <li>{{ err.message }}</li>
+            }
+          </ul>
+        }
+      </label>
+      <label class="flex flex-col gap-1.5 text-sm">
+        <span class="text-zinc-500">Età (FormControl, min 3)</span>
+        <input type="number" [formField]="mixedForm.age" class="rounded-md border border-zinc-700 bg-zinc-950 px-3 py-2 text-zinc-300 focus:border-blue-500 focus:outline-none" />
+        @if (mixedForm.age().touched() && mixedForm.age().invalid()) {
+          <ul class="mt-1 list-inside list-disc text-sm text-red-400">
+            @for (err of mixedForm.age().errors(); track err.kind) {
+              <li>{{ err.message }}</li>
+            }
+          </ul>
+        }
+      </label>
+      <p class="text-sm text-zinc-500">
+        Nome: {{ mixedForm.name().value() }} · Età (value): {{ mixedForm.age().value() }} · Form valido: {{ mixedForm().valid() }}
+      </p>
+    </form>
+  </div>
+</section>
