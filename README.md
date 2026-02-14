@@ -1,92 +1,72 @@
-# Angular 21 – Signal Forms Demo
+# Angular 21 · Signal Forms Demo
 
-App didattica per provare e capire i **Signal Forms** di Angular 21. Ogni sezione spiega un aspetto (form model, validazione, schema, submit, custom control, compatForm) e ti permette di provarlo dal vivo.
+Demo didattica per le **nuove feature di Angular 21**: Signal Forms, Zoneless, Angular Aria, Tailwind CSS e control flow. Ogni sezione spiega un aspetto e permette di provarlo dal vivo.
 
-## Cosa sono i Signal Forms
+**Repository:** [github.com/jurilucci/signal-forms-demo](https://github.com/jurilucci/signal-forms-demo)
 
-I Signal Forms sono l’API **sperimentale** (`@experimental 21.0.0`) per gestire i form con **Angular Signals**: il modello del form è un **signal**, e lo stato è sincronizzato con il model. Si usano `form(model)`, la direttiva `[formField]`, validatori in una funzione schema, e opzionalmente `compatForm()` per convivere con i Reactive Forms.
+---
 
-## Sezioni nell’app
+## Cosa trovi nell’app
 
-1. **Intro / Form Model** – `signal()` come model, `form(model)`, FieldTree, `[formField]`, `value()` e aggiornamento del model.
-2. **Validazione** – `required`, `email`, `minLength` (e altri) nella funzione schema; messaggi custom; `valid()`, `touched()`, `errors()`.
-3. **Validatori custom** – `validate(path, (ctx) => ...)` con `value()` e `valueOf(altroCampo)`; reattività automatica.
-4. **Schema e riuso** – `schema<T>()` e `apply(path, schema)` per riusare le stesse regole (es. indirizzo fatturazione/spedizione).
-5. **Submit e Reset** – `submit(form, async () => ...)`, `submitting()`, `reset()` e reset con nuovo valore.
-6. **Custom control** – `FormValueControl<T>` con `value = model()`, uso con `[formField]`.
-7. **compatForm** – model misto (valori + `FormControl`), uso di `compatForm(model)` per migrare gradualmente.
+### Signal Forms (sperimentale)
+
+- **1. Intro / Form Model** — `signal()` come model, `form(model)`, FieldTree, `[formField]`, `value()` e sincronizzazione con il model.
+- **2. Validazione** — `required`, `email`, `minLength` (e altri) nella funzione schema; messaggi custom; `valid()`, `touched()`, `errors()`.
+- **3. Validatori custom** — `validate(path, (ctx) => ...)` con `value()` e `valueOf(altroCampo)`; reattività automatica.
+- **4. Schema e riuso** — `schema<T>()` e `apply(path, schema)` per riusare le stesse regole (es. indirizzo fatturazione/spedizione).
+- **5. Submit e Reset** — `submit(form, async () => ...)`, `submitting()`, `reset()` e reset con nuovo valore.
+- **6. Custom control** — `FormValueControl<T>` con `value = model()`, uso con `[formField]`.
+- **7. compatForm** — model misto (valori + `FormControl`), `compatForm(model)` per migrare gradualmente da Reactive Forms.
+
+### Altre feature Angular 21
+
+- **8. Zoneless** — Change detection senza Zone.js (default in v21), demo con signal e OnPush.
+- **9. Angular Aria** — Esempi con direttive headless accessibili: Toolbar, Tabs, Accordion, Menu, Listbox.
+- **10. Angular MCP** — Introduzione all’Angular CLI MCP Server per tooling AI/IDE.
+- **11. Tailwind** — Uso di Tailwind CSS nell’app (utility, badge, alert, card).
+- **12. Control flow** — `@if`, `@for`, `@switch` e contenuto differito nel template.
+
+---
+
+## Tecnologie
+
+- **Angular 21** (standalone, signals, zoneless)
+- **Signal Forms** (`@angular/forms/signals`)
+- **Angular Aria** (`@angular/aria`) — Toolbar, Tabs, Accordion, Menu, Listbox
+- **Tailwind CSS v4** (PostCSS, utility-first)
+- **SCSS** (solo `styles.scss` con `@use 'tailwindcss'`)
+
+---
 
 ## Avvio
 
 ```bash
 npm install
-ng serve
+npm start
 ```
 
-Poi apri `http://localhost:4200` e usa il menu per spostarti tra le sezioni.
-
-## Riferimenti
-
-- [Forms with signals (Angular v21)](https://v21.angular.dev/essentials/signal-forms)
-- [Signal Forms Overview](https://angular.dev/guide/forms/signals/overview)
-- Import: `import { form, required, ... } from '@angular/forms/signals'`; per compat: `import { compatForm } from '@angular/forms/signals/compat'`.
+Apri [http://localhost:4200](http://localhost:4200) e usa il menu laterale per spostarti tra le sezioni.
 
 ---
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.4.
-
-## Development server
-
-To start a local development server, run:
+## Build
 
 ```bash
-ng serve
+npm run build
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Output in `dist/signal-forms-demo/` (configurazione production di default).
 
-## Code scaffolding
+---
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Riferimenti
 
-```bash
-ng generate component component-name
-```
+- [Forms with signals (Angular)](https://angular.dev/essentials/signal-forms)
+- [Angular without Zone.js (Zoneless)](https://angular.dev/guide/zoneless)
+- [Angular Aria](https://angular.dev/guide/aria/overview)
+- [Tailwind con Angular](https://angular.dev/guide/tailwind)
+- [Angular v21 Release](https://angular.dev/events/v21)
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
 
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+*Progetto generato con [Angular CLI](https://github.com/angular/angular-cli) 21.1.4.*
