@@ -6,25 +6,27 @@ Demo didattica per le **nuove feature di Angular 21**: Signal Forms, Zoneless, A
 
 ---
 
-## Cosa trovi nell’app
+## Cosa trovi nell'app
 
 ### Signal Forms (sperimentale)
 
-- **1. Intro / Form Model** — `signal()` come model, `form(model)`, FieldTree, `[formField]`, `value()` e sincronizzazione con il model.
-- **2. Validazione** — `required`, `email`, `minLength` (e altri) nella funzione schema; messaggi custom; `valid()`, `touched()`, `errors()`.
-- **3. Validatori custom** — `validate(path, (ctx) => ...)` con `value()` e `valueOf(altroCampo)`; reattività automatica.
-- **4. Schema e riuso** — `schema<T>()` e `apply(path, schema)` per riusare le stesse regole (es. indirizzo fatturazione/spedizione).
-- **5. Submit e Reset** — `submit(form, async () => ...)`, `submitting()`, `reset()` e reset con nuovo valore.
-- **6. Custom control** — `FormValueControl<T>` con `value = model()`, uso con `[formField]`.
-- **7. compatForm** — model misto (valori + `FormControl`), `compatForm(model)` per migrare gradualmente da Reactive Forms.
+- **Intro e form model** — `signal()` come model, `form(model)`, FieldTree, `[formField]`, `value()` e sincronizzazione con il model.
+- **Validazione** — `required`, `email`, `minLength` (e altri) nella funzione schema; messaggi custom; `valid()`, `touched()`, `errors()`.
+- **Validatori custom** — `validate(path, (ctx) => ...)` con `value()` e `valueOf(altroCampo)`; reattività automatica.
+- **Schema e riuso** — `schema<T>()` e `apply(path, schema)` per riusare le stesse regole (es. indirizzo fatturazione/spedizione).
+- **Submit e reset** — `submit(form, async () => ...)`, `submitting()`, `reset()` e reset con nuovo valore.
+- **Custom control** — `FormValueControl<T>` con `value = model()`, uso con `[formField]`.
+- **compatForm** — model misto (valori + `FormControl`), `compatForm(model)` per migrare gradualmente da Reactive Forms.
 
 ### Altre feature Angular 21
 
-- **8. Zoneless** — Change detection senza Zone.js (default in v21), demo con signal e OnPush.
-- **9. Angular Aria** — Esempi con direttive headless accessibili: Toolbar, Tabs, Accordion, Menu, Listbox.
-- **10. Angular MCP** — Introduzione all’Angular CLI MCP Server per tooling AI/IDE.
-- **11. Tailwind** — Uso di Tailwind CSS nell’app (utility, badge, alert, card).
-- **12. Control flow** — `@if`, `@for`, `@switch` e contenuto differito nel template.
+- **Zoneless** — Change detection senza Zone.js (default in v21), demo con signal e OnPush.
+- **Angular Aria** — Esempi con direttive headless accessibili: Toolbar, Tabs, Accordion, Menu, Listbox.
+- **Angular MCP** — Introduzione all'Angular CLI MCP Server per tooling AI/IDE.
+- **Tailwind** — Uso di Tailwind CSS nell'app (utility, badge, card).
+- **Control flow** — `@if`, `@for`, `@switch` e contenuto differito nel template.
+
+Nella sezione **Control flow** puoi cambiare il tema dell'app (chiaro / scuro / sistema); la preferenza viene salvata in `localStorage`.
 
 ---
 
@@ -45,7 +47,7 @@ npm install
 npm start
 ```
 
-Apri [http://localhost:4200](http://localhost:4200) e usa il menu laterale per spostarti tra le sezioni.
+Apri [http://localhost:4200](http://localhost:4200) e usa il menu laterale per spostarti tra le sezioni. Su mobile il menu è disponibile tramite il pulsante hamburger.
 
 ---
 
