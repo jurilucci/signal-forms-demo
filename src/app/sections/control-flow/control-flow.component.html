@@ -1,5 +1,7 @@
 <section class="max-w-2xl animate-fade-in">
-  <h1 class="mb-6 text-2xl font-bold text-zinc-100">Control flow e template</h1>
+  <div class="mb-6 flex items-baseline flex-wrap gap-3">
+    <h1 class="text-2xl font-bold tracking-tight text-zinc-100">Control flow e template</h1>
+  </div>
 
   <div class="mb-8 text-sm leading-relaxed">
     <h2 class="mb-3 text-base text-zinc-500">Nuova sintassi built-in</h2>
@@ -40,15 +42,38 @@
       <h3 class="mb-3 text-base text-blue-400">&#64;switch</h3>
       <p class="mb-2 text-zinc-400">Tema selezionato:</p>
       <div class="mb-3 flex gap-2">
-        <button type="button" (click)="setTheme('light')" [class.bg-green-600]="theme() === 'light'" [class.text-white]="theme() === 'light'" class="rounded-md border border-zinc-700 bg-zinc-800 px-4 py-2 text-sm text-zinc-300 hover:bg-zinc-700">Light</button>
-        <button type="button" (click)="setTheme('dark')" [class.bg-green-600]="theme() === 'dark'" [class.text-white]="theme() === 'dark'" class="rounded-md border border-zinc-700 bg-zinc-800 px-4 py-2 text-sm text-zinc-300 hover:bg-zinc-700">Dark</button>
-        <button type="button" (click)="setTheme('system')" [class.bg-green-600]="theme() === 'system'" [class.text-white]="theme() === 'system'" class="rounded-md border border-zinc-700 bg-zinc-800 px-4 py-2 text-sm text-zinc-300 hover:bg-zinc-700">System</button>
+        <button
+          type="button"
+          (click)="setTheme('light')"
+          class="rounded-md border border-zinc-700 bg-zinc-800 px-4 py-2 text-sm text-zinc-300 transition-colors hover:bg-zinc-700"
+          [class.border-green-600]="themeService.theme() === 'light'"
+          [class.bg-green-600]="themeService.theme() === 'light'"
+          [class.text-white]="themeService.theme() === 'light'"
+        >Light</button>
+        <button
+          type="button"
+          (click)="setTheme('dark')"
+          class="rounded-md border border-zinc-700 bg-zinc-800 px-4 py-2 text-sm text-zinc-300 transition-colors hover:bg-zinc-700"
+          [class.border-green-600]="themeService.theme() === 'dark'"
+          [class.bg-green-600]="themeService.theme() === 'dark'"
+          [class.text-white]="themeService.theme() === 'dark'"
+        >Dark</button>
+        <button
+          type="button"
+          (click)="setTheme('system')"
+          class="rounded-md border border-zinc-700 bg-zinc-800 px-4 py-2 text-sm text-zinc-300 transition-colors hover:bg-zinc-700"
+          [class.border-green-600]="themeService.theme() === 'system'"
+          [class.bg-green-600]="themeService.theme() === 'system'"
+          [class.text-white]="themeService.theme() === 'system'"
+        >System</button>
       </div>
       <p class="text-sm text-zinc-400">
-        @switch (theme()) {
-          @case ('light') { <span>☀️ Modalità chiara</span> }
-          @case ('dark') { <span>🌙 Modalità scura</span> }
-          @default { <span>⚙️ Segue le preferenze di sistema</span> }
+        @if (themeService.theme() === 'light') {
+          <span>☀️ Modalità chiara</span>
+        } @else if (themeService.theme() === 'dark') {
+          <span>🌙 Modalità scura</span>
+        } @else {
+          <span>⚙️ Segue le preferenze di sistema</span>
         }
       </p>
     </div>

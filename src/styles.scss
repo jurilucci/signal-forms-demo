@@ -1,5 +1,17 @@
 @use 'tailwindcss';
 
+/* Layout a tutta altezza: niente scroll sulla pagina, solo main scrolla */
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+
+app-root {
+  display: block;
+  height: 100%;
+}
+
 /* Responsive: evita overflow su mobile */
 main {
   min-width: 0;
@@ -23,4 +35,111 @@ section {
 
 .animate-fade-in {
   animation: section-fade-in 0.35s ease-out forwards;
+}
+
+/* Tema chiaro: override colori shell e contenuti */
+[data-theme='light'] {
+  --app-bg: #f4f4f5;
+  --app-nav: #ffffff;
+  --app-border: #e4e4e7;
+  --app-text: #27272a;
+  --app-text-muted: #71717a;
+  --app-accent: #2563eb;
+  --app-card: #ffffff;
+  --app-input-bg: #fafafa;
+}
+
+[data-theme='dark'] {
+  --app-bg: #09090b;
+  --app-nav: #18181b;
+  --app-border: #27272a;
+  --app-text: #d4d4d8;
+  --app-text-muted: #a1a1aa;
+  --app-accent: #3b82f6;
+  --app-card: #18181b;
+  --app-input-bg: #09090b;
+}
+
+/* Applica variabili al layout (classi usate in app.html) */
+[data-theme='light'] .app-header,
+[data-theme='light'] .app-nav,
+[data-theme='light'] .app-footer {
+  background-color: var(--app-nav) !important;
+  border-color: var(--app-border) !important;
+  color: var(--app-text) !important;
+}
+
+[data-theme='light'] .app-header span,
+[data-theme='light'] .app-nav a,
+[data-theme='light'] .app-nav h2,
+[data-theme='light'] .app-nav [class*="text-blue"] {
+  color: var(--app-text-muted) !important;
+}
+
+[data-theme='light'] .app-nav a:hover,
+[data-theme='light'] .app-nav a.routerLinkActive {
+  color: #fff !important;
+}
+
+[data-theme='light'] .app-main {
+  background-color: var(--app-bg) !important;
+  color: var(--app-text) !important;
+  border-color: var(--app-border) !important;
+}
+
+[data-theme='light'] .app-backdrop {
+  background-color: rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Contenuti nelle sezioni (main *) */
+[data-theme='light'] .app-main h1,
+[data-theme='light'] .app-main h2,
+[data-theme='light'] .app-main h3,
+[data-theme='light'] .app-main h4 {
+  color: var(--app-text) !important;
+}
+
+[data-theme='light'] .app-main .text-zinc-100,
+[data-theme='light'] .app-main .text-zinc-300,
+[data-theme='light'] .app-main .text-zinc-400 {
+  color: var(--app-text) !important;
+}
+
+[data-theme='light'] .app-main .text-zinc-500,
+[data-theme='light'] .app-main .text-zinc-400 {
+  color: var(--app-text-muted) !important;
+}
+
+[data-theme='light'] .app-main .bg-zinc-900,
+[data-theme='light'] .app-main .bg-zinc-950,
+[data-theme='light'] .app-main .bg-zinc-800 {
+  background-color: var(--app-card) !important;
+  border-color: var(--app-border) !important;
+}
+
+[data-theme='light'] .app-main .border-zinc-700,
+[data-theme='light'] .app-main .border-zinc-800 {
+  border-color: var(--app-border) !important;
+}
+
+[data-theme='light'] .app-main input,
+[data-theme='light'] .app-main textarea {
+  background-color: var(--app-input-bg) !important;
+  color: var(--app-text) !important;
+  border-color: var(--app-border) !important;
+}
+
+[data-theme='light'] .app-main button:not(.routerLinkActive) {
+  background-color: var(--app-card) !important;
+  color: var(--app-text) !important;
+  border-color: var(--app-border) !important;
+}
+
+[data-theme='light'] .app-main code {
+  background-color: #e4e4e7 !important;
+  color: var(--app-text) !important;
+}
+
+[data-theme='light'] .app-main .text-blue-400 {
+  color: var(--app-accent) !important;
 }

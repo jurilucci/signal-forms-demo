@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-
-type Theme = 'light' | 'dark' | 'system';
+import { ThemeService } from '../../theme.service';
 
 @Component({
   selector: 'app-control-flow',
@@ -9,12 +8,12 @@ type Theme = 'light' | 'dark' | 'system';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ControlFlowComponent {
+  constructor(readonly themeService: ThemeService) {}
+
   /** Per @if / @else: mostra o nasconde il messaggio */
   showMessage = signal(true);
   /** Per @for: lista di elementi */
   items = signal<string[]>(['Primo', 'Secondo', 'Terzo']);
-  /** Per @switch: tema selezionato */
-  theme = signal<Theme>('system');
   /** Per @defer (opzionale): caricamento differito */
   loaded = signal(false);
 
@@ -27,8 +26,8 @@ export class ControlFlowComponent {
     this.items.update(list => [...list, `Elemento ${n}`]);
   }
 
-  setTheme(t: Theme): void {
-    this.theme.set(t);
+  setTheme(t: 'light' | 'dark' | 'system'): void {
+    this.themeService.setTheme(t);
   }
 
   loadLazy(): void {

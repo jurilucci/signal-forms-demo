@@ -1,5 +1,5 @@
 <!-- Mobile header: hamburger + title (solo sotto md) -->
-<header class="fixed left-0 right-0 top-0 z-30 flex items-center gap-3 border-b border-zinc-800 bg-zinc-900 px-4 py-3 md:hidden">
+<header class="app-header fixed left-0 right-0 top-0 z-30 flex items-center gap-3 border-b border-zinc-800 bg-zinc-900 px-4 py-3 md:hidden">
   <button
     type="button"
     (click)="toggleMenu()"
@@ -21,17 +21,17 @@
 <!-- Backdrop: chiude il menu al tap (solo mobile) -->
 @if (menuOpen()) {
   <div
-    class="fixed inset-0 z-40 bg-black/60 md:hidden"
+    class="app-backdrop fixed inset-0 z-40 bg-black/60 md:hidden"
     aria-hidden="true"
     (click)="closeMenu()"
   ></div>
 }
 
-<div class="flex min-h-[100dvh] flex-col font-sans">
-  <div class="flex min-h-[100dvh] flex-1">
+<div class="flex h-[100dvh] max-h-[100dvh] flex-col overflow-hidden font-sans">
+  <div class="flex min-h-0 flex-1">
     <!-- Nav: su mobile drawer scorrevole, su md+ sempre visibile -->
     <nav
-      class="fixed inset-y-0 left-0 z-50 flex w-60 flex-col gap-1 border-r border-zinc-800 bg-zinc-900 px-4 py-6 transition-transform duration-200 ease-out md:static md:translate-x-0 md:pt-6"
+      class="app-nav fixed inset-y-0 left-0 z-50 flex w-60 flex-col gap-1 border-r border-zinc-800 bg-zinc-900 px-4 py-6 transition-transform duration-200 ease-out md:static md:translate-x-0 md:pt-6"
       [class.-translate-x-full]="!menuOpen()"
       [class.translate-x-0]="menuOpen()"
       role="navigation"
@@ -52,35 +52,38 @@
         </button>
       </div>
       <div class="mb-2 h-px bg-zinc-800" aria-hidden="true"></div>
-      <a routerLink="/intro" routerLinkActive="bg-green-600 text-white" [class]="navLinkClass" (click)="closeMenu()"><span class="mr-2 opacity-80" aria-hidden="true">📝</span>1. Intro / Form Model</a>
-      <a routerLink="/validation" routerLinkActive="bg-green-600 text-white" [class]="navLinkClass" (click)="closeMenu()"><span class="mr-2 opacity-80" aria-hidden="true">✓</span>2. Validazione</a>
-      <a routerLink="/custom-validators" routerLinkActive="bg-green-600 text-white" [class]="navLinkClass" (click)="closeMenu()"><span class="mr-2 opacity-80" aria-hidden="true">🔧</span>3. Validatori custom</a>
-      <a routerLink="/schemas" routerLinkActive="bg-green-600 text-white" [class]="navLinkClass" (click)="closeMenu()"><span class="mr-2 opacity-80" aria-hidden="true">📋</span>4. Schema e riuso</a>
-      <a routerLink="/submit-reset" routerLinkActive="bg-green-600 text-white" [class]="navLinkClass" (click)="closeMenu()"><span class="mr-2 opacity-80" aria-hidden="true">📤</span>5. Submit e Reset</a>
-      <a routerLink="/custom-control" routerLinkActive="bg-green-600 text-white" [class]="navLinkClass" (click)="closeMenu()"><span class="mr-2 opacity-80" aria-hidden="true">🎛️</span>6. Custom control</a>
-      <a routerLink="/compat-form" routerLinkActive="bg-green-600 text-white" [class]="navLinkClass" (click)="closeMenu()"><span class="mr-2 opacity-80" aria-hidden="true">🔀</span>7. compatForm</a>
-      <a routerLink="/zoneless" routerLinkActive="bg-green-600 text-white" [class]="navLinkClass" (click)="closeMenu()"><span class="mr-2 opacity-80" aria-hidden="true">⚡</span>8. Zoneless</a>
-      <a routerLink="/angular-aria" routerLinkActive="bg-green-600 text-white" [class]="navLinkClass" (click)="closeMenu()"><span class="mr-2 opacity-80" aria-hidden="true">♿</span>9. Angular Aria</a>
-      <a routerLink="/angular-mcp" routerLinkActive="bg-green-600 text-white" [class]="navLinkClass" (click)="closeMenu()"><span class="mr-2 opacity-80" aria-hidden="true">🤖</span>10. Angular MCP</a>
-      <a routerLink="/tailwind" routerLinkActive="bg-green-600 text-white" [class]="navLinkClass" (click)="closeMenu()"><span class="mr-2 opacity-80" aria-hidden="true">🎨</span>11. Tailwind</a>
-      <a routerLink="/control-flow" routerLinkActive="bg-green-600 text-white" [class]="navLinkClass" (click)="closeMenu()"><span class="mr-2 opacity-80" aria-hidden="true">🔄</span>12. Control flow</a>
+      <a routerLink="/intro" routerLinkActive="bg-green-600 text-white" [class]="navLinkClass" (click)="closeMenu()"><span class="mr-2 opacity-80" aria-hidden="true">📝</span>Intro e form model</a>
+      <a routerLink="/validation" routerLinkActive="bg-green-600 text-white" [class]="navLinkClass" (click)="closeMenu()"><span class="mr-2 opacity-80" aria-hidden="true">✓</span>Validazione</a>
+      <a routerLink="/custom-validators" routerLinkActive="bg-green-600 text-white" [class]="navLinkClass" (click)="closeMenu()"><span class="mr-2 opacity-80" aria-hidden="true">🔧</span>Validatori custom</a>
+      <a routerLink="/schemas" routerLinkActive="bg-green-600 text-white" [class]="navLinkClass" (click)="closeMenu()"><span class="mr-2 opacity-80" aria-hidden="true">📋</span>Schema e riuso</a>
+      <a routerLink="/submit-reset" routerLinkActive="bg-green-600 text-white" [class]="navLinkClass" (click)="closeMenu()"><span class="mr-2 opacity-80" aria-hidden="true">📤</span>Submit e reset</a>
+      <a routerLink="/custom-control" routerLinkActive="bg-green-600 text-white" [class]="navLinkClass" (click)="closeMenu()"><span class="mr-2 opacity-80" aria-hidden="true">🎛️</span>Custom control</a>
+      <a routerLink="/compat-form" routerLinkActive="bg-green-600 text-white" [class]="navLinkClass" (click)="closeMenu()"><span class="mr-2 opacity-80" aria-hidden="true">🔀</span>compatForm</a>
+      <a routerLink="/zoneless" routerLinkActive="bg-green-600 text-white" [class]="navLinkClass" (click)="closeMenu()"><span class="mr-2 opacity-80" aria-hidden="true">⚡</span>Zoneless</a>
+      <a routerLink="/angular-aria" routerLinkActive="bg-green-600 text-white" [class]="navLinkClass" (click)="closeMenu()"><span class="mr-2 opacity-80" aria-hidden="true">♿</span>Angular Aria</a>
+      <a routerLink="/angular-mcp" routerLinkActive="bg-green-600 text-white" [class]="navLinkClass" (click)="closeMenu()"><span class="mr-2 opacity-80" aria-hidden="true">🤖</span>Angular MCP</a>
+      <a routerLink="/tailwind" routerLinkActive="bg-green-600 text-white" [class]="navLinkClass" (click)="closeMenu()"><span class="mr-2 opacity-80" aria-hidden="true">🎨</span>Tailwind</a>
+      <a routerLink="/control-flow" routerLinkActive="bg-green-600 text-white" [class]="navLinkClass" (click)="closeMenu()"><span class="mr-2 opacity-80" aria-hidden="true">🔄</span>Control flow</a>
     </nav>
 
-    <!-- Main: padding top per header mobile, padding responsive -->
-    <main class="min-h-[100dvh] flex-1 overflow-auto bg-zinc-950 px-4 pb-4 pt-24 text-zinc-300 ring-1 ring-zinc-800/50 sm:px-6 md:px-8 md:pb-8 md:pt-8">
+    <!-- Main: unica area scrollabile, flex-1 con min-h-0 per contenere lo scroll -->
+    <main class="app-main min-h-0 flex-1 overflow-auto bg-zinc-950 px-4 pb-4 pt-24 text-zinc-300 ring-1 ring-zinc-800/50 sm:px-6 md:px-8 md:pb-8 md:pt-8">
       <router-outlet />
     </main>
   </div>
 
-  <!-- Footer -->
-  <footer class="border-t border-zinc-800 bg-zinc-900/80 px-4 py-4 text-center text-sm text-zinc-500 sm:px-6 md:px-8">
-    <p class="mb-2">
-      <span class="font-medium text-zinc-400">Angular 21</span> · Signal Forms, Zoneless, Aria, Tailwind
-    </p>
-    <p class="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
+  <!-- Footer: una riga compatta -->
+  <footer class="app-footer shrink-0 border-t border-zinc-800 bg-zinc-900/80 px-4 py-2 text-center text-sm text-zinc-500 sm:px-6 md:px-8">
+    <p class="flex flex-wrap items-center justify-center gap-x-2 gap-y-0">
+      <span class="font-medium text-zinc-400">Angular 21</span>
+      <span aria-hidden="true">·</span>
+      <span>Signal Forms, Zoneless, Aria, Tailwind</span>
+      <span aria-hidden="true">·</span>
       <a href="https://github.com/jurilucci/signal-forms-demo" target="_blank" rel="noopener" class="text-blue-400 no-underline hover:underline">GitHub</a>
+      <span aria-hidden="true">·</span>
       <a href="https://angular.dev" target="_blank" rel="noopener" class="text-blue-400 no-underline hover:underline">Angular Docs</a>
-      <a href="https://stackblitz.com/github/jurilucci/signal-forms-demo" target="_blank" rel="noopener" class="text-blue-400 no-underline hover:underline">Apri in StackBlitz</a>
+      <span aria-hidden="true">·</span>
+      <a href="https://stackblitz.com/github/jurilucci/signal-forms-demo" target="_blank" rel="noopener" class="text-blue-400 no-underline hover:underline">StackBlitz</a>
     </p>
   </footer>
 </div>
