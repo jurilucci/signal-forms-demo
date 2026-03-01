@@ -1,1 +1,10 @@
 @use 'tailwindcss';
+
+/* Responsive: evita overflow su mobile */
+main {
+  min-width: 0;
+}
+section {
+  min-width: 0;
+  overflow-wrap: break-word;
+}
